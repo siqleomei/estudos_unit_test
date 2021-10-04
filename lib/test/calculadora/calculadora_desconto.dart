@@ -1,31 +1,32 @@
 class CalculadoraDesconto {
-  static late double _valorTotal;
+  static late double _valorSemDesconto;
   static late double _desconto;
 
-  CalculadoraDesconto._(double valorTotal, double desconto);
+  CalculadoraDesconto._(double valorSemDesconto, double desconto);
 
-  static CalculadoraDesconto iniciarCalculadora(valorTotal, desconto) =>
-      _calculadoraDesconto(valorTotal, desconto);
+  static CalculadoraDesconto iniciarCalculadora(valorSemDesconto, desconto) =>
+      _iniciarCalculadoraDesconto(valorSemDesconto, desconto);
 
-  static CalculadoraDesconto _calculadoraDesconto(
-      double valorTotal, double desconto) {
-    _setValorTotal(valorTotal);
+  static CalculadoraDesconto _iniciarCalculadoraDesconto(
+      double valorSemDesconto, double desconto) {
+    _setvalorSemDesconto(valorSemDesconto);
     _setDesconto(desconto);
-    return CalculadoraDesconto._(valorTotal, desconto);
+    return CalculadoraDesconto._(valorSemDesconto, desconto);
   }
 
   static double _setDesconto(double desconto) => _isValorMaiorZero(desconto)
       ? throw ArgumentError("O desconto deve ser maior que zero!")
       : _desconto = desconto;
 
-  static double _setValorTotal(double valorTotal) =>
-      _isValorMaiorZero(valorTotal)
+  static double _setvalorSemDesconto(double valorSemDesconto) =>
+      _isValorMaiorZero(valorSemDesconto)
           ? throw ArgumentError("O valor inicial deve ser maior que zero!")
-          : _valorTotal = valorTotal;
+          : _valorSemDesconto = valorSemDesconto;
 
   static bool _isValorMaiorZero(double valor) => valor <= 0;
 
-  double calcularPorcentagem() => _valorTotal - (_valorTotal * _desconto / 100);
+  double calcularPorcentagem() =>
+      _valorSemDesconto - (_valorSemDesconto * _desconto / 100);
 
-  double calcular() => _valorTotal - _desconto;
+  double calcular() => _valorSemDesconto - _desconto;
 }
